@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf"
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./main.xhtml">
+
+            <ui:define name="title">
+                Register or Login page
+            </ui:define>
+
+            <ui:define name="content">
+                <c:if test="#{signUp.alert==1}">
+                    <script>alert('Account not created ! User Already Exist')</script>
+                </c:if>
+                <c:if test="#{signUp.alert==2}">
+                    <script>alert('Account not created ! Email Already Exist')</script>
+                </c:if>
+                <div class=" col-md-6 ">
+                    <h2>Login!</h2>
+                    <form a:id="login" class="content_login">
+                        <h:panelGrid columns="3" id="loginPanel">
+                            <p:outputLabel for="userLogin" value="User ID" />
+                            <p:inputText id="userLogin" value="#{signUp.user}" required="true" requiredMessage="Enter User ID" />
+                            <p:message for="userLogin" />
+                            <p:outputLabel for="passLogin" value="Password" />
+                            <p:password id="passLogin" value="#{signUp.pass}" required="true" requiredMessage="Enter Password" />
+                            <p:message for="passLogin" />
+                            <p:commandButton value="Submit" action="#{signUp.login()}" update="loginPanel" />
+                        </h:panelGrid>
+                    </form>
+                </div>
+                <div class="col-md-6 ">
+                    <h2>SignUp!</h2>
+                    <form a:id="signup">
+
+                        <h:panelGrid columns="3" id="panel_sign_up">
+                            <p:outputLabel for="firstName" value="First Name" />
+                            <p:inputText  id="firstName"  value="#{signUp.firstName}" required="true" requiredMessage="Enter First Name" /> 
+
+
+
+                            <p:message for="firstName" />
+
+                            <p:outputLabel for="lastName" value="Last Name" />
+                            <p:inputText  id="lastName"  value="#{signUp.lastName}" required="true" requiredMessage="Enter Last Name" >
+
+                                <p:ajax update="lastName" event="keyup"  delay="1000" />
+                            </p:inputText>
+                            <p:message for="lastName" />
+
+
+
+                            <p:outputLabel value="Phone " for="phoneWithExt" />
+                            <p:inputMask value="#{signUp.phoneNumber}" mask="+88 01999 999999"  id="phoneWithExt" placeHolder="0" rendered="true" requiredMessage="Put your contact number!" />
+
+
+                            <p:message for="phoneWithExt" />
+
+                            <p:outputLabel value="User ID " for="user" />
+                            <p:autoComplete id="user" value="#{signUp.user}" completeMethod="#{signUp.UserList}" required="true" requiredMessage="Enter User ID"  />
+                            <p:message for="user" />
+                            <p:outputLabel value="Password  " for="pass" />
+                            <p:password id="pass" value="#{signUp.pass}" inline="true" match="pass2" feedback="true" required="true" requiredMessage="Enter Password"  />
+                            <p:message for="pass" />
+                            <p:outputLabel value="Confirm Password " for="pass2"  />
+                            <p:password id="pass2"  value="#{signUp.pass}"   required="true" requiredMessage="Enter Password 2"  />
+                            <p:message for="pass2" />
+
+                            <p:outputLabel for="email"  value="Email"/>
+                            <p:inputText value="#{signUp.email}" id="email" required="true" requiredMessage="Enter Email Address" validatorMessage="Invalid Email" >
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                            </p:inputText>
+
+                            <p:message for="email" />
+
+                            <p:outputLabel for="dob" value="Birth Date" />
+
+
+
+
+
+                            <p:calendar id="dob" value="#{signUp.date}" />
+
+                            <p:message for="dob" />
+                            <p:outputLabel for="gender" value="Gender" />
+                            <p:selectOneRadio id="gender" value="#{signUp.gender}" required="true" requiredMessage="Select Sexual Status" >
+
+                                <f:selectItem itemLabel="Male" itemValue="Male" />
+                                <f:selectItem itemLabel="Female" itemValue="Female" />
+                            </p:selectOneRadio>
+
+                            <p:message for="gender"/>
+                            
+                            <p:outputLabel for="location" value="Location " />
+                            <p:inputText id="location" value="#{signUp.location}" />
+                            <br/>
+                            <p:outputLabel for="messName" value="Mess Name " />
+                            <p:inputText id="messName" value="#{signUp.messName}" required="true" requiredMessage="Set a Mess Name" />
+                            <p:message for="messName" />
+
+
+
+
+
+
+
+                            <p:commandButton value="Submit" icon="ui-icon-check" action="#{signUp.sendMail()}" update="panel_sign_up" />
+                        </h:panelGrid>
+                    </form>
+                </div>
+            </ui:define>
+            <!--
+            <ui:define name="allMenus" >
+            <p:dock position="bottom" itemWidth="30"  >
+                <p:menuitem value="Add Member" url="#" icon="/resources/menus/logo-flo-multi.png" />
+                <p:menuitem value="Add Member" url="#" icon="/resources/menus/logo-flo-multi.png" />
+                <p:menuitem value="Add Member" url="#" icon="/resources/menus/logo-flo-multi.png" />
+            </p:dock>
+            </ui:define>
+            -->
+            <ui:define name="Menu" >
+                <ul class=" nav  nav-justified nav-tabs" >
+                    
+                    <li  role="presentation"  > <a style="text-decoration: none; " href="#">Menu</a></li>
+                    <li role="presentation"    > <a style="text-decoration: none; " href="#">Profile</a></li>
+                    <li role="presentation"   > <a style="text-decoration: none; " href="#">Profile1</a></li>
+                    <li role="presentation"   > <a style="text-decoration: none; " href="#">Profile2</a></li>
+                    <li role="presentation"   > <a style="text-decoration: none; " href="#"  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></a>
+                        <ul class="dropdown-menu ">
+                            <li><a href="#"  >Action</a></li>
+
+
+
+                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Something else here</a></li>
+
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </ui:define>
+            
+        </ui:composition>
+
+    </body>
+</html>

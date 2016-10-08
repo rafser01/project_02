@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf"
+
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <link rel="shortcut icon" href="resources/favicon/favicon.ico"   type="image/x-icon"  />
+         
+
+        <title> <ui:insert name="title">Content</ui:insert></title>
+        <link rel="stylesheet" href="resources/css/custom.css" />   
+        
+
+
+    </h:head>
+
+    <body a:id="body" class="body " >
+        <header>
+            <div  class="top "   >
+                <div class="header container navbar-default">
+                    <div class="col-md-4">
+
+                        <p:graphicImage class="img-responsive" url="/resources/header/clemson_logo_sports.png"  width="30%" />
+                    </div>
+                    <div class="col-md-4">
+                        heading
+                    </div>
+                    <div class="col-md-4">
+                        notification
+                    </div>
+                </div>
+                <div class="header container navbar-inverse ">
+
+                    <div class=" col-md-9  body_nav"  style="line-height: 0.4" >
+
+                        <ui:insert name="Menu"> </ui:insert>
+
+
+
+                    </div>
+                    <div class="col-md-3" >
+
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <!--  <input type="text"   a:id="searchInput" class="form-control" placeholder="Search" /> -->
+                                <p:inputText placeholder="Search" class="form-control" >
+                                    <p:ajax event="keyup" />
+                                </p:inputText>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div> 
+            </div>
+
+
+        </header>
+        <div  class="body_nav center_content container">
+            <ui:insert name="content">Content</ui:insert>
+
+
+
+
+
+        </div>
+        <footer>
+            <div id="bottom" class=" bottom container">
+
+                <ui:insert name="bottom"> All Rights Reserved   <a href="#">Rakin Afser</a> </ui:insert>
+
+            </div>
+        </footer>
+        <ui:insert name="allMenus"></ui:insert>
+
+        <ui:insert name="message" class="mess_id"> </ui:insert>
+
+        <script src="resources/js/maxcdn.bootstrapcdn.com_bootstrap_3.3.6_js_bootstrap.min.js"></script>
+
+    </body>
+
+</html>

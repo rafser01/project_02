@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf"
+
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./mainAdmin.xhtml">
+
+            <ui:define name="title">
+                Daily Transactions
+            </ui:define>
+            <ui:define name="header_style">
+                <style>
+                    .ui-widget .ui-panelmenu-header{
+                        background-color: #C5F2E8;
+
+                    }
+                    .ui-panelmenu .ui-widget{
+                        color: white;
+                    }
+                    .ui-datatable .ui-widget  {
+                        background-color: #C5F2E8;
+                    }
+                    .ui-layout-pane{
+                        background-color: #C5F2E8;
+                    }
+
+                </style>
+            </ui:define>
+
+            <ui:define name="Menu">
+
+
+
+
+
+
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="transaction">
+                    <p:layout  style="min-width: 400px; min-height: 600px"  >
+                        <p:layoutUnit position="west" resizable="true"  size="250"  minSize="40" maxSize="250" >
+                            <c:forEach items="#{transactions.mealBean.memberList()}" var="name">
+                                <p:panelMenu style="width:100% " >
+                                    <p:submenu label="#{name}"   >
+                                        <p:menuitem value="Deposit" style="color: #009877"   actionListener="#{transactions.setSubmenu(name, 'deposit')}" icon="ui-icon-plus
+                                                    " update="transaction" />
+                                        <p:menuitem value="Deduction" style="color: #009877" update="transaction"   actionListener="#{transactions.setSubmenu(name,'deduction')}"  icon="ui-icon-scissors" />
+                                    </p:submenu>
+
+                                </p:panelMenu>
+                            </c:forEach>
+
+
+                        </p:layoutUnit>
+                        <p:layoutUnit position="center">
+                            <c:if test="#{transactions.depositClicked==true}">
+                                <p:dataTable rows="50" paginator="true" rowsPerPageTemplate="50,100" 
+                                             value="#{transactions.userMoneyList}" editable="true" 
+                                             var="a" filteredValue="#{transactions.userMoneyList}"    >
+
+                                    <p:ajax event="rowEdit" listener="#{transactions.onRowEdit}"  />
+
+                                    <p:column headerText="Date"      >
+                                        <h:outputText value="#{a.date}" />
+                                    </p:column>
+                                    <p:column headerText="Deposit"  >
+                                        <p:cellEditor>
+                                            <f:facet name="output" ><h:outputText value="#{a.deposit}" /></f:facet>
+                                            <f:facet name="input"><h:inputText value="#{a.deposit}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column headerText="Update" >
+                                        <p:rowEditor />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </c:if> 
+                            <c:if test="#{transactions.depositClicked==false}">
+                                <p:dataTable rows="50" paginator="true" rowsPerPageTemplate="50,100" 
+                                             value="#{transactions.userMoneyList}" editable="true" 
+                                             var="a" filteredValue="#{transactions.userMoneyList}"    >
+
+                                    <p:ajax event="rowEdit" listener="#{transactions.onRowEdit}"  />
+
+                                    <p:column headerText="Date"      >
+                                        <h:outputText value="#{a.date}" />
+                                    </p:column>
+                                    <p:column headerText="House Rent"  >
+                                        <p:cellEditor>
+                                            <f:facet name="output" ><h:outputText value="#{a.houseRent}" /></f:facet>
+                                            <f:facet name="input"><h:inputText value="#{a.houseRent}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column headerText="Utilities"  >
+                                        <p:cellEditor>
+                                            <f:facet name="output" ><h:outputText value="#{a.utilities}" /></f:facet>
+                                            <f:facet name="input"><h:inputText value="#{a.utilities}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column headerText="Servent Bill"  >
+                                        <p:cellEditor>
+                                            <f:facet name="output" ><h:outputText value="#{a.serventBill}" /></f:facet>
+                                            <f:facet name="input"><h:inputText value="#{a.serventBill}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column headerText="Maintenance"  >
+                                        <p:cellEditor>
+                                            <f:facet name="output" ><h:outputText value="#{a.maintenance}" /></f:facet>
+                                            <f:facet name="input"><h:inputText value="#{a.maintenance}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column headerText="Update" >
+                                        <p:rowEditor />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </c:if> 
+
+                        </p:layoutUnit>
+                    </p:layout>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+            <ui:define name="allMenus">
+                allMenus
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

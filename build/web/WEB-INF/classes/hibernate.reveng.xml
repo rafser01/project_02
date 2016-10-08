@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="smartmess2"/>
+  <table-filter match-name="schedule"/>
+  <table-filter match-name="menus"/>
+  <table-filter match-name="tolet"/>
+  <table-filter match-name="messname"/>
+  <table-filter match-name="member"/>
+  <table-filter match-name="balancetransfer"/>
+  <table-filter match-name="message"/>
+  <table-filter match-name="money"/>
+  <table-filter match-name="notice"/>
+  <table-filter match-name="locations"/>
+  <table-filter match-name="images"/>
+  <table-filter match-name="meal"/>
+  <table-filter match-name="status"/>
+</hibernate-reverse-engineering>

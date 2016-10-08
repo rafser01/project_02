@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf"
+
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <head a:id="head">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+         
+                
+              <link rel="shortcut icon" href="../resources/favicon/favicon.ico"   type="image/x-icon"  />  
+             
+
+                <title> <ui:insert name="title">Content</ui:insert></title>
+
+                <link rel="stylesheet" href="../resources/css/custom.css" />   
+                <script type="text/javascript" >
+                    var curLocMarker = null;
+                    
+                    function markerAdComplete(){
+                    var title = document.getElementById('title');
+                    curLocMarker.setTitle(title.value);
+                    title.value = "";
+                    curLocMarker = null;
+                    PF('confirmMap').hide();
+                    }
+
+                    function cancel(){
+                    PF('confirmMap').hide();
+                    curLocMarker.setMap(null);
+                    curLocMarker = null;
+                    return false;
+                    }
+                </script>
+
+
+                 
+                    <ui:insert name="header_style"> </ui:insert>
+                
+
+
+
+
+                </head>
+
+                <body a:id="body" class="body " >
+
+                    <header>
+                        <div  class="top "   >
+                            <div class="header container navbar-default">
+                                <div class="col-md-4">
+
+                                    <p:graphicImage class="img-responsive" url="/resources/header/clemson_logo_sports.png"  width="20%" />
+                                </div>
+                                <div class="col-md-4">
+                                    heading
+                                </div>
+                                <div class="col-md-4">
+                                    notification
+                                    <h:form>
+                                        <p:commandButton value="Log Out" action="#{signUp.logOut()}"  />
+
+
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="header container navbar-inverse ">
+
+                                <div class="body-nav col-md-9"  style="line-height: 0.4"  >
+
+                                    <ul class="nav  nav-justified nav-tabs" a:id="menuItems" >
+
+                                        <c:forEach var="menuList" items="#{menuManagedBean.getmenu()}"  >
+                                            <c:choose >
+                                                <c:when test="#{ !menuList.link.equals('null') and menuList.remark1.equals('null')}" > 
+                                                    <li role="presentation">
+                                                        <c:choose>
+                                                            <c:when test="#{menuList.link.equals('#')}">
+                                                                <a style="text-decoration: none; " href="#{menuList.link}" onclick="PF('#{menuList.action}').show()" > #{menuList.name}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a style="text-decoration: none; " href="#{menuList.link}"> #{menuList.name}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </li>
+                                                </c:when>
+
+                                                <c:when test="#{menuList.link.equals('null')}" >
+                                                    <li role="presentation"   ><a style="text-decoration: none; " href="#"   class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#{menuList.name} <span class="caret"></span></a>
+
+                                                        <ul class="dropdown-menu ">
+                                                            <c:forEach var="subMenu" items="#{menuManagedBean.getSubMenu(menuList.name)}">
+                                                                <li><a href="#{subMenu.link}"  >#{subMenu.name}</a></li>
+
+                                                            </c:forEach>
+
+
+                                                        </ul>
+
+                                                    </li>
+
+
+
+
+                                                </c:when> 
+                                            </c:choose>
+
+
+                                        </c:forEach>
+
+
+                                    </ul>
+
+
+
+
+
+                                </div>
+                                <div class="col-md-3" >
+
+                                    <form class="navbar-form navbar-left" role="search">
+                                        <div class="form-group">
+                                            <!--  <input type="text"   a:id="searchInput" class="form-control" placeholder="Search" /> -->
+                                            <p:inputText placeholder="Search" class="form-control" >
+                                                <p:ajax event="keyup" />
+                                            </p:inputText>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div> 
+                        </div>
+
+
+                    </header>
+                    <div  class=" container">
+                        <ui:insert name="content"> </ui:insert>
+
+                        <p:stack expanded="true"     >
+                            <p:menuitem  value="Chat" onclick="PF('messsageBox').show()" icon="/resources/menus/chat.png" url="#" /> 
+                        </p:stack>
+
+
+
+                    </div>
+                    <footer>
+                        <div id="bottom" class=" bottom container">
+
+                            <ui:insert name="bottom"> All Rights Reserved   <a href="#">Rakin Afser</a> </ui:insert>
+
+                        </div>
+                    </footer>
+
+                    <!-- This is bottom menus -->
+                    <p:dock class="container" >
+                        <c:forEach var="getAllMenu" items="#{menuManagedBean.getAllMenu()}" >
+                            <c:choose>
+                                <c:when test="#{getAllMenu.link.equals('#')}" >
+                                    <p:menuitem style="text-decoration: none" value="#{getAllMenu.name}" url="#{getAllMenu.link}" onclick="PF('#{getAllMenu.action}').show()" icon="/resources/menus/#{getAllMenu.remark2}" />
+                                </c:when>
+                                <c:otherwise>
+                                    <p:menuitem style="text-decoration: none" value="#{getAllMenu.name}" url="#{getAllMenu.link}" icon="/resources/menus/#{getAllMenu.remark2}" />
+                                </c:otherwise>
+                            </c:choose>
+
+                        </c:forEach>
+                    </p:dock>
+
+
+                    <!--This section is for post loaded content-->
+                    <p:notificationBar  position="top" effect="slide" styleClass="top" widgetVar="bar" id="bar"  >
+                        <h:form class="container">
+                            <h:panelGrid columns="3">
+                                <p:outputLabel for="memberEmail" value="Email" />
+                                <p:inputText value="" id="memberEmail" placeholder="Input Member Email!" requiredMessage="Member Email ID required to send invitation" />
+                                <p:message for="memberEmail" />
+                                <p:commandButton value="Send Invitation !" />
+                            </h:panelGrid>
+                        </h:form>
+
+                        <p:commandButton value="Hide" onclick="PF('bar').hide();"  />
+                    </p:notificationBar> 
+
+                    <p:dialog widgetVar="messsageBox" showEffect="fold">
+                        <form a:id="form">
+                            <p:outputLabel value="To :" for="to" />
+                            <p:inputText value="" id="to" />
+                        </form>
+                    </p:dialog>
+
+                    <p:dialog widgetVar="noticeVar" width="50%" >
+
+                        <h:form id="fm"  >
+
+
+                            <h:panelGrid columns="3" >    
+
+                                <p:outputLabel value="Type Notice Text" for="textNotice" />
+                                <p:editor class="col-md-12"  id="textNotice" value="#{noticeBean.notice.noticeText}" required="true"  />
+                                <p:message for="textNotice" />
+                                <p:outputLabel value="End Date : " for="endDate" />
+                                <p:calendar id="endDate" value="#{noticeBean.notice.date}" locale="de" showOn="button" navigator="true" pattern="yyyy-MM-dd" required="true" >
+
+                                </p:calendar>
+                                <p:message for="endDate" />
+                                <p:outputLabel value="Tag  : " for="tag" />
+                                <p:autoComplete multiple="true" value="#{noticeBean.tag}"  id="tag" completeMethod="#{toletBean.members()}">
+
+                                </p:autoComplete>
+                                <p:message for="tag" />
+
+                                <p:commandButton value="Submit" actionListener="#{noticeBean.submit()}"   update="confirm"     />
+                                <p:outputLabel value="#{noticeBean.message}" id="confirm" style="color: #009877"  />
+
+
+                            </h:panelGrid>
+
+
+
+                        </h:form>
+
+                    </p:dialog>
+
+                    
+                    <!-- balance transfer option -->
+                    <p:dialog widgetVar="balanceTransfer" width="30%">
+                        <h:form>
+                            <p:ajaxStatus style="display: block; margin-bottom: 2em; height: 24px" >
+                                <f:facet name="start">
+                                    <p:graphicImage   url="/resources/loading/spinner.gif" />
+                                </f:facet>
+                            </p:ajaxStatus>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel for="to_receiver" value="TO : " />
+                                <p:selectOneMenu value="#{balenceTransferBean.receiver}" style="width: 150px;" id="to_receiver">
+                                    <f:selectItem itemLabel="Select Member" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{balenceTransferBean.recieverList}" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="sender" value="From : "/>
+                                <p:outputLabel id="sender" value="#{balenceTransferBean.bt.member.user}" />
+                                <p:outputLabel for="amountQty" value="Amount : " />
+                                <p:inputMask mask="9999.99" placeHolder="0" id="amountQty" value="#{balenceTransferBean.bt.amount}" />
+                                <p:outputLabel for="maxAmount" value="Maximum Transferable amount" />
+                                <p:outputLabel value="" id="maxAmount" />
+                                <p:outputLabel for="verification" value="Verify Password : " />
+                                <p:inputText id="verification" value="#{balenceTransferBean.password}" />
+                                <p:commandButton value="Send" action="#{balenceTransferBean.sendBalnce()}"  update="sendingStats" >
+
+                                </p:commandButton>
+                                <p:outputLabel id="sendingStats" value="#{balenceTransferBean.sendingStats}" />
+                            </p:panelGrid>
+                        </h:form>
+
+                    </p:dialog>
+
+                    <script src="../resources/js/maxcdn.bootstrapcdn.com_bootstrap_3.3.6_js_bootstrap.min.js"></script>
+                </body>
+
+                </html>

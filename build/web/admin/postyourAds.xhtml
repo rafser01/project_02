@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf"
+      >
+
+    <body>
+
+        <ui:composition template="./mainAdmin.xhtml">
+
+            <ui:define name="title">
+                Post your ad :: Smart Mess
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h:form>
+                    <div class="" >
+                        <div class="col-md-6">
+                            <p:outputLabel   value="#{toletBean.member.user}" />
+                            <h:panelGrid columns="3" >
+                                <h:outputLabel value="Title " for="title"/>
+                                <p:inputText  id="title" value="#{toletBean.tolet.title}" required="true" requiredMessage="Enter Title" />
+                                <p:message for="title" />
+                                <h:outputLabel for="room" value="Quantity Of Room: "/>
+                                <p:inputMask mask="9" placeHolder="0" id="room" value="#{toletBean.tolet.roomSize}" />
+                                <br></br>
+                                <h:outputLabel for="wash" value="Quantity Of WashRoom:" />
+                                <p:inputMask mask="9" placeHolder="0" id="wash" value="#{toletBean.tolet.washroom}"/>
+                                <br></br>
+                                <h:outputLabel for="varanda" value="Quantity Of Varanda: "/>
+                                <p:inputMask mask="9" placeHolder="0" id="varanda" value="#{toletBean.tolet.varanda}"/>
+                                <br></br>
+                                <h:outputLabel for="parking" value="Parking: "/>
+                                <p:selectBooleanButton id="parking" value="#{toletBean.tolet.parking}" onLabel="true" offLabel="false" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px"   >
+                                </p:selectBooleanButton>
+                                <br></br>
+                                <h:outputLabel value="Rent: " for="rent"/>
+                                <p:inputMask mask="99999.99" placeholder="0" id="rent" value="#{toletBean.tolet.rent}" required="true" requiredMessage="Enter Room Rent" />
+                                <br></br>
+                                <h:outputLabel value="Contact: " for="cont"/>
+                                <p:inputMask  mask="01999-999-999" id="cont" value="#{toletBean.tolet.contactNumber}" required="true" requiredMessage="Enter Contact Number"/>
+                                <p:message for="cont" />
+
+                                <h:outputLabel value="E-mail: " for="email"/>
+                                <p:inputText placeholder="me@example.com" id="email" value="#{toletBean.tolet.email}" required="true" requiredMessage="Enter E-mail" validatorMessage="Invalid Email!">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </p:inputText>
+                                <p:message for="email" />
+
+
+
+
+                                <h:outputLabel value="Image: " for="image"/>
+                                <p:fileUpload id="image"  value="#{toletBean.file}"   /> 
+                                <br></br>
+                                <!-- <p:commandButton value="Upload" actionListener="" disabled="false" /> -->
+                                <h:outputLabel value="End Date: " for="date"/>
+                                <p:calendar value="#{toletBean.tolet.date}" locale="de" navigator="true"  id="date" required="true" requiredMessage="Last Date OfRent"/>
+                                <p:message for="date" />
+
+
+                                <p:commandButton value="Post"  />
+
+                            </h:panelGrid>
+                        </div>
+                        <div class="col-md-6">
+                            <h:panelGrid columns="4" >
+                                <h:outputLabel value="Area: " for="area"/>
+                                <p:selectOneMenu id="area" value="#{postAdsBean.tolet.area}" style="width:150px"  >
+                                    <p:ajax   listener="#{postAdsBean.locaList()}"  update="location" />
+                                    <f:selectItem itemLabel="Select Area" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{postAdsBean.areas()}" />
+                                </p:selectOneMenu>
+
+
+                                <h:outputLabel value="Location: " for="location"/>
+                                <p:selectOneMenu id="location" value="#{postAdsBean.tolet.location}" style="width: 150px" >
+                                    <p:ajax  update="gmap"  listener="#{postAdsBean.coords()}" />
+                                    <f:selectItem itemLabel="Choose" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{postAdsBean.locaList()}" />
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>  
+                            <p:fieldset id="gmap" >
+
+                                <p:gmap id="map"  model="#{postAdsBean.mapModel}" center="23.8101612262493, 90.41284561157227" zoom="13" streetView="true" type="TERRAIN"  style="width: 100%; height: 400px"  >  
+                                    <p:ajax event="pointSelect" listener="#{postAdsBean.onPointSelect}" update="map" />
+                                        
+                                </p:gmap>
+                            </p:fieldset>
+                            
+                        </div>
+
+                    </div>
+                </h:form>
+<script src="http://maps.google.com/maps/api/js?sensor=false" 
+              type="text/javascript"></script>
+                    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

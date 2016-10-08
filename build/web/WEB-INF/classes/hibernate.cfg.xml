@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smartmess2?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">r50493233</property>
+    <mapping resource="com/smartMess/pojos/Notice.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Message.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Tolet.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Menus.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Money.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Member.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Balancetransfer.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Meal.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Images.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Messname.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Status.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Locations.hbm.xml"/>
+    <mapping resource="com/smartMess/pojos/Schedule.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2016 3:13:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.smartMess.pojos.Member" table="member" catalog="smartmess2" optimistic-lock="version">
+        <id name="user" type="string">
+            <column name="user" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="45" not-null="true" />
+        </property>
+        <property name="dob" type="date">
+            <column name="dob" length="10" not-null="true" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="45" />
+        </property>
+        <property name="image" type="binary">
+            <column name="image" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="firstName" length="45" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="45" not-null="true" />
+        </property>
+        <property name="messName" type="string">
+            <column name="messName" length="100" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="45" not-null="true" />
+        </property>
+        <property name="occupation" type="string">
+            <column name="occupation" length="45" />
+        </property>
+        <property name="remarkMem1" type="string">
+            <column name="remark_mem1" length="45" />
+        </property>
+        <property name="remarkMem2" type="string">
+            <column name="remark_mem2" length="45" />
+        </property>
+        <set name="meals" table="meal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Meal" />
+        </set>
+        <set name="moneys" table="money" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Money" />
+        </set>
+        <set name="messages" table="message" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Message" />
+        </set>
+        <set name="notices" table="notice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Notice" />
+        </set>
+        <set name="schedules" table="schedule" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Schedule" />
+        </set>
+        <set name="tolets" table="tolet" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Tolet" />
+        </set>
+        <set name="balancetransfers" table="balancetransfer" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Balancetransfer" />
+        </set>
+        <set name="messnames" table="messname" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Messname" />
+        </set>
+        <set name="statuses" table="status" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.smartMess.pojos.Status" />
+        </set>
+    </class>
+</hibernate-mapping>

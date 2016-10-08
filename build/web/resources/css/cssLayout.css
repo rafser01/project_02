@@ -1,0 +1,114 @@
+
+.top {
+    position: relative;
+
+
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+
+}
+
+.bottom {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+    text-align: left;
+    font-size: small;
+}
+
+#left {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+    
+    
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+.top a:link:hover, #top a:visited:hover  {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}
+.header{
+    width: 100%;
+
+    margin: auto;
+    background-color:  transparent;
+    box-shadow: azure 0px 2px 5px 0px;
+    text-align: center;
+
+
+    border-radius: 2px;
+}
+.left_header{
+    color: #D20005;
+
+
+}
+.middle_header{
+
+}
+.body{
+    
+    
+}
+.content_login{
+    margin-left: 20% ;
+    margin-top: 20%;
+}
+
+.body-nav
+{
+    line-height: 0.428571;
+    width: 75%;
+}
+.mess_id{
+    float: right;
+    width: 20%;
+    
+}
+.tolet-cateory{
+    background-color: #009877;
+    color: white;
+    border-radius: 4px;
+    padding: 5px;
+   color:#9d9d9d
+}
+ 
+ 
+
+
+

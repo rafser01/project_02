@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf"
+
+
+    xmlns:p="http://primefaces.org/ui"
+
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body a:id="body">
+
+        <ui:composition template="./mainAdmin.xhtml">
+
+            <ui:define name="title">
+                ToLet :: Smart Mess System
+            </ui:define>
+
+
+
+            <ui:define name="content" >
+
+                <h:form id="full">
+                    <p:layout  style="min-width: 400px; min-height: 600px"  >
+                        <p:layoutUnit position="west" resizable="true"  size="250"  minSize="40" maxSize="250" >
+                            <div class="tolet-cateory">
+
+                                <h:panelGrid columns="1">
+                                    <p:outputLabel for="category" value="Category :"  />
+                                    <p:selectOneRadio value="#{toletBean.category}" id="category">
+                                        <p:ajax update="full" listener="#{toletBean.customSearch(toletBean.category)}"  />
+                                        <f:selectItem itemLabel="Room" itemValue="Room" />
+                                        <f:selectItem itemLabel="Appartment" itemValue="Appartment" />
+                                    </p:selectOneRadio>
+
+                                </h:panelGrid>
+
+                            </div>
+                            <p:separator />
+
+                            <p:outputLabel  value="Location :" />
+
+                            <h:panelGrid columns="2">
+                                <p:outputLabel for="area" value="Area : " />
+                                <p:selectOneMenu id="area" value="#{toletBean.tolet.area}"  >
+                                    <p:ajax  listener="#{toletBean.locations()}" update="location" />
+                                    <f:selectItem itemLabel="Select Area" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{toletBean.area}" />
+                                </p:selectOneMenu>
+
+
+                                <p:outputLabel for="location" value="Location : " />
+                                <p:selectOneMenu value="#{toletBean.tolet.location}" id="location">
+                                    <p:ajax update="full" listener="#{toletBean.customSearch(toletBean.tolet.location)}" />
+                                    <f:selectItem itemLabel="Select Location" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{toletBean.location}" />
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>
+
+
+
+
+                            <p:separator />
+                            <div>
+                                <h:panelGrid columns="2" >
+                                    <p:outputLabel   value="Type : " /> <br/>
+
+                                    <p:selectBooleanCheckbox value="#{toletBean.wanted}" id="wanted" >
+                                        <p:ajax update="full" listener="#{toletBean.customTypes()}" />
+                                    </p:selectBooleanCheckbox>
+                                    <p:outputLabel for="wanted" value=" Wanted" />
+
+                                    <p:selectBooleanCheckbox value="#{toletBean.offered}" id="offered" >
+                                        <p:ajax update="full" listener="#{toletBean.customTypes()}" />
+                                    </p:selectBooleanCheckbox>
+                                    <p:outputLabel for="offered" value=" Offered" />
+                                </h:panelGrid>
+                            </div>
+                            <p:separator />
+                            <h:panelGrid columns="2">
+                                <p:commandButton value="Reset Search" >
+                                    <p:ajax update="full" listener="#{toletBean.reset()}" /> 
+                                </p:commandButton>
+                                <p:commandButton value="Post"   action="postyourAds" />
+                            </h:panelGrid>
+
+                        </p:layoutUnit>
+                        <h:form id="third">
+                            <p:layoutUnit position="center">
+                                <p:dataTable id="adspanel" var="tolet" value="#{toletBean.ads}" rows="5"
+                                             paginator="true"  
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             >
+
+                                    <p:column>
+
+                                        <h:panelGrid columns="2">
+                                            <!-- <p:graphicImage name="" width="30" height="40" /> -->
+                                            <h:panelGroup>
+                                                <h4 a:id="title" style="color: #009877">#{tolet.title}</h4>
+                                                <p a:id="date">Posted Date: #{tolet.date}</p>
+                                                <p a:id="rent">#{tolet.rent} /Month </p>
+                                            </h:panelGroup>
+
+                                        </h:panelGrid>
+
+                                    </p:column>
+
+
+                                </p:dataTable>
+                            </p:layoutUnit>
+                        </h:form>
+
+                    </p:layout>
+                </h:form>
+
+
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>

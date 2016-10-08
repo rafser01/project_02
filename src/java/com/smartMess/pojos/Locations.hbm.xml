@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2016 3:13:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.smartMess.pojos.Locations" table="locations" catalog="smartmess2" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="area" type="string">
+            <column name="area" length="45" not-null="true" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="45" not-null="true" />
+        </property>
+        <property name="remark1" type="string">
+            <column name="remark1" length="45" />
+        </property>
+        <property name="remark2" type="string">
+            <column name="remark2" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

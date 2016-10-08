@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      
+
+
+      xmlns:p="http://primefaces.org/ui"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <body>
+
+        <ui:composition template="./mainAdmin.xhtml">
+
+            <ui:define name="title">
+                Meal :: Smart Mess
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="full">
+                    
+                    <p:layout  style="min-width: 400px; min-height: 600px"  >
+                        <p:layoutUnit position="west" resizable="true"  size="250"  minSize="40" maxSize="250" >
+
+                            <p:commandButton value="Create New Month" onclick="PF('createMonth').show()" />
+
+                        </p:layoutUnit>
+                        <h:form id="meal_date">
+                            <p:layoutUnit position="center">
+                                <h:form id="form">
+
+                                    <p:fieldset  >
+                                        <h:panelGrid columns="2">
+                                            <p:outputLabel for="selectMem" value="Select a Member : " />
+                                       
+                                            <h:selectOneMenu id="selectMem" value="#{mealBean.member.user}" style="width: 150px"  label="Member">
+                                                <p:ajax   listener="#{mealBean.chnageMeal()}" update="mealTable"   />
+                                                
+                                                <f:selectItems value="#{mealBean.memberList()}" />
+                                            </h:selectOneMenu> 
+                                             </h:panelGrid>
+                                    <p:dataTable rows="16" paginator="true" rowsPerPageTemplate="16,31" 
+                                                 value="#{mealBean.mealList}" editable="true" 
+                                                 var="a" id="mealTable" widgetVar="mealTable" filteredValue="#{mealBean.mealList}">
+                                        <p:ajax event="rowEdit" listener="#{mealBean.onRowEdit}"  />
+<!--                                        <f:facet name="header">
+
+
+                                            Select Date: 
+                                            <p:calendar pattern="yyyy-MM-dd"  onkeyup="PF('mealTable').filter()"   style="width:150px"/>
+
+                                        </f:facet>-->
+                                        <p:column headerText="Date"  filterBy="#{a.date}" filterMatchMode="contains"   >
+                                            <h:outputText value="#{a.date}" />
+                                        </p:column>
+                                        <p:column headerText="Break-fast">
+                                            <p:cellEditor >
+                                                <f:facet name="output"><h:outputText value="#{a.breakFast}" /></f:facet>
+                                                <f:facet name="input" ><p:spinner  value="#{a.breakFast}" stepFactor="0.5" max="9" min="0"  /></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column headerText="Lunch">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{a.lunch}" /></f:facet>
+                                                <f:facet name="input"><p:spinner value="#{a.lunch}" stepFactor="1" max="9" min="0" /></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column headerText="Dinner">
+                                            <p:cellEditor >
+                                                <f:facet name="output"><h:outputText value="#{a.dinner}" /></f:facet>
+                                                <f:facet name="input"><p:spinner  value="#{a.dinner}" stepFactor="1" max="9" min="0" /></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column headerText="Edit">
+                                            <p:rowEditor />
+                                        </p:column>
+
+                                    </p:dataTable>  
+                                    
+                                    </p:fieldset>
+                                </h:form>
+
+                            </p:layoutUnit>
+                        </h:form>
+
+                    </p:layout>
+                </h:form>
+                <p:dialog widgetVar="createMonth" width="25%">  
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel for="choose_Month" value="Select Month" />
+                            <p:selectOneMenu id="choose_Month" value="#{mealBean.monthName}" style="width: 150px">
+
+                                <f:selectItem itemLabel="Choose" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{mealBean.months}" />
+
+                            </p:selectOneMenu>
+                            <p:commandButton value="Submit" action="#{mealBean.createMonth()}"      >
+
+                                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:outputLabel id="status" value="" style="" />
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+<!--
+                                                
+-->

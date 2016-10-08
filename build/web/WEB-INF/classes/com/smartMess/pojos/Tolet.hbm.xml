@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2016 3:13:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.smartMess.pojos.Tolet" table="tolet" catalog="smartmess2" optimistic-lock="version">
+        <id name="idAuto" type="java.lang.Integer">
+            <column name="id_auto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="member" class="com.smartMess.pojos.Member" fetch="select">
+            <column name="user" length="45" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="200" not-null="true" />
+        </property>
+        <property name="roomSize" type="java.lang.Integer">
+            <column name="room_size" />
+        </property>
+        <property name="washroom" type="java.lang.Integer">
+            <column name="washroom" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" length="100" not-null="true" />
+        </property>
+        <property name="varanda" type="java.lang.Integer">
+            <column name="varanda" />
+        </property>
+        <property name="parking" type="java.lang.Boolean">
+            <column name="parking" />
+        </property>
+        <property name="rent" type="double">
+            <column name="rent" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="contactNumber" type="string">
+            <column name="contactNumber" length="45" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="100" not-null="true" />
+        </property>
+        <property name="area" type="string">
+            <column name="area" length="45" not-null="true" />
+        </property>
+        <property name="remark1" type="string">
+            <column name="remark1" length="45" />
+        </property>
+        <property name="remark2" type="string">
+            <column name="remark2" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2016 3:13:48 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.smartMess.pojos.Schedule" table="schedule" catalog="smartmess2" optimistic-lock="version">
+        <id name="idAuto" type="java.lang.Integer">
+            <column name="id_auto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="member" class="com.smartMess.pojos.Member" fetch="select">
+            <column name="user" length="45" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true" />
+        </property>
+        <property name="bazar" type="date">
+            <column name="bazar" length="10" />
+        </property>
+        <property name="toilet" type="date">
+            <column name="toilet" length="10" />
+        </property>
+        <property name="remark1" type="string">
+            <column name="remark1" length="45" />
+        </property>
+        <property name="remark2" type="string">
+            <column name="remark2" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
